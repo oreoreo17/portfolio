@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生ポートフォリオ | [あなたの名前]</title>
+    <style>
+        /*
+        ========================================
+        ベーススタイル
+        ========================================
+        */
+        :root {
+            /* カラーパレット */
+            --primary-color: #007bff; /* メインの青 */
+            --secondary-color: #6c757d; /* サブの灰色 */
+            --background-color: #ffffff; /* 背景色 */
+            --text-color: #343a40; /* 主要テキスト色 */
+            --light-bg: #f8f9fa; /* 薄い背景色 */
+            --accent-color: #28a745; /* 強調色（任意） */
+            
+            /* フォント */
+            --font-main: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* 全体のリセットと基本設定 */
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-align: center;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /*
+        ========================================
+        ヘッダー (ナビゲーション)
+        ========================================
+        */
+        .header {
+            background-color: var(--background-color);
+            border-bottom: 1px solid var(--light-bg);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav li {
+            margin-left: 30px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /*
+        ========================================
+        ヒーローセクション (トップ)
+        ========================================
+        */
+        .hero {
+            background-color: var(--light-bg);
+            min-height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 5%;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /*
+        ========================================
+        アバウトセクション (自己紹介)
+        ========================================
+        */
+        #about {
+            background-color: var(--background-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-image {
+            text-align: center;
+        }
+
+        .profile-image img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .self-introduction h3 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        /* ガクチカのスタイル調整 */
+        .gaku-chika {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-left: 5px solid var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .gaku-chika h4 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        /*
+        ========================================
+        スキルセクション
+        ========================================
+        */
+        #skills {
+            background-color: var(--light-bg);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .skill-card {
+            background-color: var(--background-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: calc(33% - 20px);
+            min-width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .skill-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        /*
+        ========================================
+        フッター
+        ========================================
+        */
+        .footer {
+            background-color: var(--text-color);
+            color: var(--light-bg);
+            text-align: center;
+            padding: 30px 5%;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        /*
+        ========================================
+        レスポンシブデザイン
+        ========================================
+        */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+            
+            .nav ul {
+                margin-top: 10px;
+            }
+            
+            .nav li {
+                margin: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .skill-card {
+                width: 100%;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Port.</a>
+        <nav class="nav">
+            <ul>
+                <li><a href="#about">自己紹介</a></li>
+                <li><a href="#skills">スキル</a></li>
+                <li><a href="#works">制作実績</a></li>
+                <li><a href="#contact">コンタクト</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>[あなたの名前]</h1>
+            <p>〇〇大学 〇〇学部 〇〇学科 | 未来をデザインする学生</p>
+            <a href="#works" class="cta-button">実績を見る</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>🧑‍🎓 自己紹介 (About Me)</h2>
+        <div class="about-grid">
+            <div class="profile-image">
+                <img src="placeholder.jpg" alt="プロフィール画像"> 
+            </div>
+            <div class="self-introduction">
+                <h3>学歴・概要</h3>
+                <p>〇〇大学 〇〇学部 〇〇学科に在籍しています。大学では主に[学んでいる分野]について深く学んでいます。</p>
+                <p>趣味は[趣味]や[趣味]で、常に新しいことへの挑戦を心がけています。特に[興味のある分野]に関心があり、将来は[なりたい職業や目標]を目指しています。</p>
+
+                <div class="gaku-chika">
+                    <h4>🌟 学生時代に力を入れたこと (ガクチカ)</h4>
+                    <p>高校三年時、受験の重圧から**不眠症**を患い、日中の学業に集中できないという深刻な課題に直面しました。この目標達成が危うい状況に対し、私は深く眠れた日の経験から「**身体的な疲労**」が有効な解決策だと推測し、現状打破のために行動を始めました。</p>
+                    <p>具体的には、**毎日30分のランニングと筋力トレーニング**を日課に加え、就寝前のリラックス時間を確保するなど、生活リズムの抜本的な改善を自ら実行しました。その結果、この取り組みを**一か月継続**しただけで、病気以前のように安定して眠れるようになり、日中の活動に再び精力的に打ち込めるようになりました。</p>
+                    <p>この経験を通じて、困難な状況においても**原因を分析し、粘り強く主体的に解決策を実行する力**を身につけることができたと確信しています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>🛠️ スキル (My Skills)</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <h4>プログラミング</h4>
+                <p>Python, Java, C++ など (学習期間: 〇年)</p>
+                <p>基礎的なアルゴリズム、データ構造の理解。</p>
+            </div>
+            <div class="skill-card">
+                <h4>Web技術</h4>
+                <p>HTML5, CSS3, JavaScript (学習期間: 〇ヶ月)</p>
+                <p>レスポンシブデザインの基本的な実装、モダンなUI/UXへの関心。</p>
+            </div>
+            <div class="skill-card">
+                <h4>その他</h4>
+                <p>Microsoft Office (Word, Excel, PowerPoint)</p>
+                <p>データ分析、プレゼンテーション資料作成能力。</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="works">
+        <h2>💡 制作実績 (Works)</h2>
+        <p style="text-align: center;">ここに具体的な制作物（Webサイト、アプリケーション、デザインなど）のキャプチャと詳細を掲載します。</p>
+        <p style="text-align: center; color: var(--secondary-color);">例: プロジェクト名、使用技術、担当範囲、制作期間。</p>
+    </section>
+    
+    <section id="contact">
+        <h2>✉️ コンタクト (Contact)</h2>
+        <p style="text-align: center;">ご興味を持っていただけましたら、以下の方法でご連絡ください。</p>
+        <p style="text-align: center;">メール: [メールアドレス] | LinkedIn/GitHub: [リンク]</p>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 [あなたの名前]. All rights reserved. | <a href="#">トップへ戻る</a></p>
+    </footer>
+
+</body>
+</html>
